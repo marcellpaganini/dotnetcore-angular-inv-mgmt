@@ -1,0 +1,1 @@
+# dotnetcore-angular-inventory-management
