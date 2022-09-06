@@ -213,11 +213,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\src\\Angular\\dotnetcore-angular-inventory-management\\InventoryManagement\\Server\\Server.csproj",
+      "projectUniqueName": "C:\\src\\MyProjects\\dotnetcore-angular-inventory-management\\InventoryManagement\\Server\\Server.csproj",
       "projectName": "Server",
-      "projectPath": "C:\\src\\Angular\\dotnetcore-angular-inventory-management\\InventoryManagement\\Server\\Server.csproj",
+      "projectPath": "C:\\src\\MyProjects\\dotnetcore-angular-inventory-management\\InventoryManagement\\Server\\Server.csproj",
       "packagesPath": "C:\\Users\\mtanure\\.nuget\\packages\\",
-      "outputPath": "C:\\src\\Angular\\dotnetcore-angular-inventory-management\\InventoryManagement\\Server\\obj\\",
+      "outputPath": "C:\\src\\MyProjects\\dotnetcore-angular-inventory-management\\InventoryManagement\\Server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\mtanure\\AppData\\Roaming\\NuGet\\NuGet.Config",
