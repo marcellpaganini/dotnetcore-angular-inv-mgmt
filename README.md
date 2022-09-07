@@ -57,7 +57,7 @@
   * Add nuget package   
  ```bash
  dotnet add package Microsoft.EntityFrameworkCore.SqlServer
- dotnet add package Microsoft.EntityFrameworkCore.Design
+ dotnet add package Microsoft.EntityFrameworkCore.Tools
  ```  
  * Migrations  
   * First Migration   
@@ -78,4 +78,9 @@ Solution: Use bash (workaround)
 ✖ Error: Property 'name' has no initializer and is not definitely assigned in the constructor.      
 Solution: Add ```"strictPropertyInitialization": false``` in the compiler options of the tsconfig.json or a default value to the property.    
 ✖ Error: Can't bind to 'ngModel' since it isn't a known property of 'input'.      
-Solution: Add FormsModule and ReactiveFormsModule to the imports array in app.module.ts.
+Solution: Add FormsModule and ReactiveFormsModule to the imports array in app.module.ts.  
+✖ Error: Angular Material installation: No terminal detected. '--skip-confirmation' can be used to bypass installation confirmation. Ensure package name is correct prior to '--skip-confirmation' option usage.  
+Solution: Type the command: npm install --save @angular/material @angular/cdk @angular/animations and then ng add @angular/material with git bash.    
+
+### Sample ERD:  
+![alt text](https://soft-builder.com/wp-content/uploads/2020/06/inventory-system-er-diagram.jpg)
