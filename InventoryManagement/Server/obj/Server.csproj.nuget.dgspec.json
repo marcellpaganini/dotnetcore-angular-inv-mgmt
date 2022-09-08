@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\src\\MyProjects\\dotnetcore-angular-inventory-management\\InventoryManagement\\server\\Server.csproj": {}
+    "C:\\src\\MyProjects\\dotnetcore-angular-inventory-management\\InventoryManagement\\Server\\Server.csproj": {}
   },
   "projects": {
-    "C:\\src\\MyProjects\\dotnetcore-angular-inventory-management\\InventoryManagement\\server\\Server.csproj": {
+    "C:\\src\\MyProjects\\dotnetcore-angular-inventory-management\\InventoryManagement\\Server\\Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\src\\MyProjects\\dotnetcore-angular-inventory-management\\InventoryManagement\\server\\Server.csproj",
+        "projectUniqueName": "C:\\src\\MyProjects\\dotnetcore-angular-inventory-management\\InventoryManagement\\Server\\Server.csproj",
         "projectName": "Server",
-        "projectPath": "C:\\src\\MyProjects\\dotnetcore-angular-inventory-management\\InventoryManagement\\server\\Server.csproj",
+        "projectPath": "C:\\src\\MyProjects\\dotnetcore-angular-inventory-management\\InventoryManagement\\Server\\Server.csproj",
         "packagesPath": "C:\\Users\\mtanure\\.nuget\\packages\\",
-        "outputPath": "C:\\src\\MyProjects\\dotnetcore-angular-inventory-management\\InventoryManagement\\server\\obj\\",
+        "outputPath": "C:\\src\\MyProjects\\dotnetcore-angular-inventory-management\\InventoryManagement\\Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mtanure\\AppData\\Roaming\\NuGet\\NuGet.Config",

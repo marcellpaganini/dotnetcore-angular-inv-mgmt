@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Pra+Isfs94G/0S57XxZQ8OQhv7Y8T7JNxZ39hbXR/9BorjoROTtCUnxXsWKAIVjHwAjyYxC4ItNRgZ9eqTEu5w==",
+  "dgSpecHash": "HOpmyxelp1Ix+16ko44X0hw6AtswWcbGXss7jczpW/yKuSGUaOBF08DgTMGn2W1AlUqCFdlPyZSjjYO/F7+aRw==",
   "success": true,
-  "projectFilePath": "C:\\src\\MyProjects\\dotnetcore-angular-inventory-management\\InventoryManagement\\server\\Server.csproj",
+  "projectFilePath": "C:\\src\\MyProjects\\dotnetcore-angular-inventory-management\\InventoryManagement\\Server\\Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mtanure\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\mtanure\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
