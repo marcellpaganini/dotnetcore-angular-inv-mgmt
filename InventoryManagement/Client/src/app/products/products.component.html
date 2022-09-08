@@ -1,0 +1,22 @@
+<h1>Products</h1>
+
+<mat-spinner *ngIf="!products"></mat-spinner>
+  <table [hidden]="!products">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.name | slice:0:50}}</td>
+        <td>{{ product.description | slice:0:100 }}...</td>
+        <td>{{ product.price | currency }}</td>
+        <td>{{ product.quantity }}</td>
+        <td>{{ product.status }}</td>
+    </tbody>
+  </table>
