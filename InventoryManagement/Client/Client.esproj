@@ -6,4 +6,13 @@
     <StartupCommand>npm start</StartupCommand>
     <JavaScriptTestFramework>Jasmine</JavaScriptTestFramework>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="src\app\suppliers\file.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptConfiguration Remove="src\app\material\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="src\app\material\**" />
+  </ItemGroup>
 </Project>
