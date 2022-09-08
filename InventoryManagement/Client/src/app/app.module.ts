@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { ProductsComponent } from './products/products.component';
+import { SuppliersComponent } from './suppliers/suppliers.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ProductsComponent } from './products/products.component';
     HomeComponent,
     FetchDataComponent,
     NavMenuComponent,
-    ProductsComponent
+    ProductsComponent,
+    SuppliersComponent
   ],
   imports: [
     BrowserModule,

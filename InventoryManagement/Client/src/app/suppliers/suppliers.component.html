@@ -1,0 +1,22 @@
+<h1>Suppliers</h1>
+
+<mat-spinner *ngIf="!suppliers"></mat-spinner>
+<table [hidden]="!suppliers">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Province</th>
+      <th>Phone</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let supplier of suppliers">
+      <td>{{ supplier.name }}</td>
+      <td>{{ supplier.address }}...</td>
+      <td>{{ supplier.province }}</td>
+      <td>{{ supplier.phone }}</td>
+      <td>{{ supplier.email }}</td>
+  </tbody>
+</table>
