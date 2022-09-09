@@ -11,6 +11,7 @@ import { Product } from './product';
 })
 
 export class ProductsComponent implements OnInit {
+  public displayedColumns: string[] = ['name', 'description', 'price', 'quantity', 'status']
   public products!: Product[];
 
   constructor(private http: HttpClient) { }
@@ -21,5 +22,4 @@ export class ProductsComponent implements OnInit {
         this.products = result;
       }, error => console.error(error));
   }
-
 }
