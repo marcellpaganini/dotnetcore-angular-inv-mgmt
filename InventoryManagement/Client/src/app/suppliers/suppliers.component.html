@@ -1,7 +1,7 @@
 <h1>Suppliers</h1>
 
 <mat-spinner *ngIf="!suppliers"></mat-spinner>
-<table mat-table [dataSource]="suppliers" [hidden]="!suppliers">
+<table mat-table [dataSource]="suppliers" [hidden]="!suppliers" class="mat-elevation-z8">
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>
     <td mat-cell *matCellDef="let supplier">{{ supplier.name }}</td>
