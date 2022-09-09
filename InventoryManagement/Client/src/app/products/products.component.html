@@ -1,7 +1,7 @@
 <h1>Products</h1>
 
 <mat-spinner *ngIf="!products"></mat-spinner>
-<table mat-table [dataSource]="products" [hidden]="!products">
+<table mat-table [dataSource]="products" [hidden]="!products" class="mat-elevation-z8">
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>
     <td mat-cell *matCellDef="let product">{{ product.name | slice:0:40 }}</td>
@@ -16,16 +16,22 @@
   </ng-container>
   <ng-container matColumnDef="price">
     <th mat-header-cell *matHeaderCellDef>Price</th>
-    <td mat-cell *matCellDef="let product">{{ product.price | currency }}&emsp;</td>
-  </ng-container>
-  <ng-container matColumnDef="quantity">
-    <th mat-header-cell *matHeaderCellDef>Quantity&emsp;</th>
-    <td mat-cell *matCellDef="let product">{{ product.quantity }}&emsp;</td>
+    <td mat-cell *matCellDef="let product">{{ product.price | currency }}&nbsp;</td>
   </ng-container>
   <ng-container matColumnDef="status">
     <th mat-header-cell *matHeaderCellDef>Status</th>
     <td mat-cell *matCellDef="let product">{{ product.status }}</td>
   </ng-container>
+  <ng-container matColumnDef="quantity">
+    <th mat-header-cell *matHeaderCellDef>Quantity</th>
+    <td mat-cell *matCellDef="let product">{{ product.quantity }}</td>
+  </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+<mat-paginator [hidden]="!products"
+               (page)="getData($event)"
+               [pageSize]="10"
+               [pageSizeOptions]="[10, 20, 50]"
+               showFirstLastButtons></mat-paginator>

@@ -23,13 +23,15 @@ namespace Server.Controllers
 
         // GET: api/Products
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<ActionResult<ApiResult<Product>>> GetProducts(int pageIndex = 0, int pageSize = 10)
         {
           if (_context.Products == null)
           {
               return NotFound();
           }
-            return await _context.Products.ToListAsync();
+            return await ApiResult<Product>.CreateAsync(
+                _context.Products.AsNoTracking(),
+                pageIndex, pageSize);
         }
 
         // GET: api/Products/5
