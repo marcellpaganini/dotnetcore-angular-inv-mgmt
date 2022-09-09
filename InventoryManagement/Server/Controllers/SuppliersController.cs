@@ -23,13 +23,15 @@ namespace Server.Controllers
 
         // GET: api/Suppliers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Supplier>>> GetSuppliers()
+        public async Task<ActionResult<ApiResult<Supplier>>> GetSuppliers(int pageIndex = 0, int pageSize = 10)
         {
           if (_context.Suppliers == null)
           {
               return NotFound();
           }
-            return await _context.Suppliers.ToListAsync();
+            return await ApiResult<Supplier>.CreateAsync(
+                _context.Suppliers.AsNoTracking(),
+                pageIndex, pageSize);
         }
 
         // GET: api/Suppliers/5
