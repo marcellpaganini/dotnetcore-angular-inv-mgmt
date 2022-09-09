@@ -10,6 +10,7 @@ import { Supplier } from './supplier';
   styleUrls: ['./suppliers.component.scss']
 })
 export class SuppliersComponent implements OnInit {
+  public displayedColumns: string[] = ['name', 'address', 'province', 'phone', 'email']
   public suppliers!: Supplier[];
 
   constructor(private http: HttpClient) { }
