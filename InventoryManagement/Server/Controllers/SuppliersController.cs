@@ -23,7 +23,7 @@ namespace Server.Controllers
 
         // GET: api/Suppliers
         [HttpGet]
-        public async Task<ActionResult<ApiResult<Supplier>>> GetSuppliers(int pageIndex = 0, int pageSize = 10)
+        public async Task<ActionResult<ApiResult<Supplier>>> GetSuppliers(int pageIndex = 0, int pageSize = 10, string? sortColumn = null, string? sortOrder = null)
         {
           if (_context.Suppliers == null)
           {
@@ -31,7 +31,7 @@ namespace Server.Controllers
           }
             return await ApiResult<Supplier>.CreateAsync(
                 _context.Suppliers.AsNoTracking(),
-                pageIndex, pageSize);
+                pageIndex, pageSize, sortColumn, sortOrder);
         }
 
         // GET: api/Suppliers/5
