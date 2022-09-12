@@ -82,5 +82,5 @@ Solution: Add FormsModule and ReactiveFormsModule to the imports array in app.mo
 ✖ Error: Angular Material installation: No terminal detected. '--skip-confirmation' can be used to bypass installation confirmation. Ensure package name is correct prior to '--skip-confirmation' option usage.  
 Solution: Type the command: npm install --save @angular/material @angular/cdk @angular/animations and then ng add @angular/material with git bash.    
 
-### Sample ERD:  
-![alt text](https://soft-builder.com/wp-content/uploads/2020/06/inventory-system-er-diagram.jpg)
+### ERD:   
+[Inventory_Management](https://lucid.app/lucidchart/efb6d117-6892-49f1-a8d5-30f987ec3398/edit?invitationId=inv_535a8d31-5797-4d95-9ebe-c754782488e2#/// "Inventory Management")
