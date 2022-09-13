@@ -1,6 +1,12 @@
 <h1>Suppliers</h1>
 
 <mat-spinner *ngIf="!suppliers"></mat-spinner>
+
+<mat-form-field [hidden]="!suppliers">
+  <input matInput #filter (keyup)="loadData(filter.value)"
+         placeholder="Filter by name..." />
+</mat-form-field>
+
 <table mat-table [dataSource]="suppliers" [hidden]="!suppliers" class="mat-elevation-z8"
        matSort (matSortChange)="loadData()" [matSortActive]="defaultSortColumn" [matSortDirection]="defaultSortOrder">
   <ng-container matColumnDef="name">
