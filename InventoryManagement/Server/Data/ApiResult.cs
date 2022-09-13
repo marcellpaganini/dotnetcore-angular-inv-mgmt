@@ -36,7 +36,13 @@ namespace Server.Data
 
         public string? SortOrder { get; set; }
 
-        private ApiResult(List<T> data, int count, int pageIndex, int pageSize, string? sortColumn, string? sortOrder)
+        public string? FilterColumn { get; set; }
+
+        public string? FilterQuery { get; set; }
+
+        private ApiResult(List<T> data, int count, int pageIndex, int pageSize, 
+                          string? sortColumn, string? sortOrder,
+                          string? filterColumn, string? filterQuery)
         {
             Data = data;
             PageIndex = pageIndex;
@@ -45,10 +51,20 @@ namespace Server.Data
             TotalPages = (int)Math.Ceiling(count / (double)PageSize);
             SortColumn = sortColumn;
             SortOrder = sortOrder;
+            FilterColumn = filterColumn;
+            FilterQuery = filterQuery;
         }
 
-        public static async Task<ApiResult<T>> CreateAsync(IQueryable<T> source, int pageIndex, int pageSize, string? sortColumn = null, string? sortOrder = null)
+        public static async Task<ApiResult<T>> CreateAsync(IQueryable<T> source, int pageIndex, int pageSize, 
+                                                           string? sortColumn = null, string? sortOrder = null,
+                                                           string? filterColumn = null, string? filterQuery = null)
         {
+            if (!string.IsNullOrEmpty(filterColumn) && !string.IsNullOrEmpty(filterQuery) && IsValidProperty(filterColumn))
+            {
+                source = source.Where(string.Format("{0}.StartsWith(@0)",
+                    filterColumn), filterQuery);
+            }
+
             var count = await source.CountAsync();
             
             if (!string.IsNullOrEmpty(sortColumn) && IsValidProperty(sortColumn))
@@ -64,7 +80,7 @@ namespace Server.Data
 
             var data = await source.ToListAsync();
 
-            return new ApiResult<T>(data, count, pageIndex, pageSize, sortColumn, sortOrder);
+            return new ApiResult<T>(data, count, pageIndex, pageSize, sortColumn, sortOrder, filterColumn, filterQuery);
 
         }
 

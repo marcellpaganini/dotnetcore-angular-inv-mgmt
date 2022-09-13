@@ -23,7 +23,9 @@ namespace Server.Controllers
 
         // GET: api/Products
         [HttpGet]
-        public async Task<ActionResult<ApiResult<Product>>> GetProducts(int pageIndex = 0, int pageSize = 10, string? sortColumn = null, string? sortOrder = null)
+        public async Task<ActionResult<ApiResult<Product>>> GetProducts(int pageIndex = 0, int pageSize = 10, 
+                                                                        string? sortColumn = null, string? sortOrder = null,
+                                                                        string? filterColumn = null, string? filterQuery = null)
         {
           if (_context.Products == null)
           {
@@ -31,7 +33,7 @@ namespace Server.Controllers
           }
             return await ApiResult<Product>.CreateAsync(
                 _context.Products.AsNoTracking(),
-                pageIndex, pageSize, sortColumn, sortOrder);
+                pageIndex, pageSize, sortColumn, sortOrder, filterColumn, filterQuery);
         }
 
         // GET: api/Products/5
