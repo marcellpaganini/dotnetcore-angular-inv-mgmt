@@ -14,8 +14,10 @@ const routes: Routes = [
   { path: 'fetch-data', component: FetchDataComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'product/:id', component: ProductEditComponent },
+  { path: 'product', component: ProductEditComponent },
   { path: 'suppliers', component: SuppliersComponent },
   { path: 'supplier/:id', component: SupplierEditComponent },
+  { path: 'supplier', component: SupplierEditComponent }
 ];
 
 @NgModule({

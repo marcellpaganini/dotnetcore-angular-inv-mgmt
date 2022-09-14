@@ -1,6 +1,6 @@
 <div class="product-edit">
   <h1>{{title}}</h1>
-  <p *ngIf="!product"><em>Loading...</em></p>
+  <p *ngIf="this.id && !product"><em>Loading...</em></p>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
     <mat-form-field>
@@ -28,8 +28,15 @@
       <input matInput formControlName="status" required placeholder="Type a status" />
     </mat-form-field>
 
+    <mat-form-field *ngIf="suppliers">
+      <mat-label>Select a supplier</mat-label>
+      <mat-select id="supplierId" formControlName="supplierId">
+        <mat-option *ngFor="let supplier of suppliers" [value]="supplier.supplierId">{{supplier.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
     <div>
-      <button mat-flat-button color="primary" type="submit">Save</button>
+      <button mat-flat-button color="primary" type="submit">{{this.id ? "Save" : "Create"}}</button>
       <button mat-flat-button color="secondary" [routerLink]="['/products']">Cancel</button>
     </div>
 

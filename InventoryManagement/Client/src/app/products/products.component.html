@@ -2,6 +2,11 @@
 
 <mat-spinner *ngIf="!products"></mat-spinner>
 
+<button mat-flat-button color="primary"
+        class="btn-add" *ngIf="products" [routerLink]="['/product']">
+  Add Product
+</button>
+
 <mat-form-field [hidden]="!products">
   <input matInput #filter (keyup)="loadData(filter.value)"
          placeholder="Filter by name..." />

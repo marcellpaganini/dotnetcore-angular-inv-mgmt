@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 
@@ -15,6 +15,7 @@ export class SupplierEditComponent implements OnInit {
   title?: string;
   form!: FormGroup;
   supplier?: Supplier;
+  id?: string;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private http: HttpClient) { }
 
@@ -32,20 +33,24 @@ export class SupplierEditComponent implements OnInit {
 
   loadData() {
     var idParam = this.activatedRoute.snapshot.paramMap.get('id');
-    var id = idParam ? idParam : '';
+    this.id = idParam ? idParam : undefined;
 
-    var url = environment.baseUrl + 'api/Suppliers/' + id;
-    this.http.get<Supplier>(url).subscribe(result => {
-      this.supplier = result;
-      this.title = "Edit - " + this.supplier.name
+    if (this.id) {
+      var url = environment.baseUrl + 'api/Suppliers/' + this.id;
+      this.http.get<Supplier>(url).subscribe(result => {
+        this.supplier = result;
+        this.title = "Edit - " + this.supplier.name
 
-      this.form.patchValue(this.supplier);
+        this.form.patchValue(this.supplier);
 
-    }, error => console.error(error));
+      }, error => console.error(error));
+    } else {
+      this.title = "Create a new supplier";
+    }
   }
 
   onSubmit() {
-    var supplier = this.supplier;
+    var supplier = this.id ? this.supplier : <Supplier>{};
 
     if (supplier) {
       supplier.name = this.form.controls['name'].value;
@@ -53,17 +58,26 @@ export class SupplierEditComponent implements OnInit {
       supplier.province = this.form.controls['province'].value;
       supplier.phone = this.form.controls['phone'].value;
       supplier.email = this.form.controls['email'].value;
+
+      if (this.id) {
+        var url = environment.baseUrl + 'api/Suppliers/' + supplier?.supplierId;
+
+        this.http
+          .put<Supplier>(url, supplier)
+          .subscribe(result => {
+            console.log("Supplier " + supplier?.supplierId + " has been updated.");
+
+            this.router.navigate(['/suppliers']);
+          }, error => console.error(error));
+      } else {
+        var url = environment.baseUrl + 'api/Suppliers/';
+        this.http
+          .post<Supplier>(url, supplier)
+          .subscribe(result => {
+            console.log("Supplier " + result.supplierId + " has been created");
+            this.router.navigate(['/suppliers']);
+          }, error => console.error(error));
+      }
     }
-
-    var url = environment.baseUrl + 'api/Suppliers/' + supplier?.supplierId;
-
-    this.http
-      .put<Supplier>(url, supplier)
-      .subscribe(result => {
-        console.log("Supplier " + supplier?.supplierId + " has been updated.");
-
-        this.router.navigate(['/suppliers']);
-      }, error => console.error(error));
   }
-
 }
