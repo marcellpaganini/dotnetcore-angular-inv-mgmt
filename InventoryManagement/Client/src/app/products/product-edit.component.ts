@@ -31,10 +31,10 @@ export class ProductEditComponent implements OnInit {
   }
 
   loadData() {
-    var idParam = this.activatedRoute.snapshot.paramMap.get('productId');
-    var id = idParam ? +idParam : 0;
+    var idParam = this.activatedRoute.snapshot.paramMap.get('id');
+    var id = idParam ? idParam : '';
 
-    var url = environment.baseUrl + 'api/Cities/' + id;
+    var url = environment.baseUrl + 'api/Products/' + id;
     this.http.get<Product>(url).subscribe(result => {
       this.product = result;
       this.title = "Edit - " + this.product.name
@@ -60,7 +60,7 @@ export class ProductEditComponent implements OnInit {
     this.http
       .put<Product>(url, product)
       .subscribe(result => {
-        console.log("Product " + product?.productId + "has been updated.");
+        console.log("Product " + product?.productId + " has been updated.");
 
         this.router.navigate(['/products']);
       }, error => console.error(error));
