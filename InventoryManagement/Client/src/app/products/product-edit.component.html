@@ -1,0 +1,37 @@
+<div class="product-edit">
+  <h1>{{title}}</h1>
+  <p *ngIf="!product"><em>Loading...</em></p>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <mat-form-field>
+      <mat-label>Name:</mat-label>
+      <input matInput formControlName="name" required placeholder="Type a name" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Description:</mat-label>
+      <input matInput formControlName="description" required placeholder="Type a description" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Price($):</mat-label>
+      <input matInput formControlName="price" required placeholder="Insert a price" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Quantity:</mat-label>
+      <input matInput formControlName="quantity" required placeholder="Insert a quantity" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Status:</mat-label>
+      <input matInput formControlName="status" required placeholder="Type a status" />
+    </mat-form-field>
+
+    <div>
+      <button mat-flat-button color="primary" type="submit">Save</button>
+      <button mat-flat-button color="secondary" [routerLink]="['/products']">Cancel</button>
+    </div>
+
+  </form>
+</div>
