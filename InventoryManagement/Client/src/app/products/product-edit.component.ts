@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { environment } from './../../environments/environment';
 import { Product } from './product';
@@ -23,12 +23,12 @@ export class ProductEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      name: new FormControl(''),
-      description: new FormControl(''),
-      price: new FormControl(0),
-      quantity: new FormControl(0),
-      status: new FormControl(''),
-      supplierId: new FormControl('')
+      name: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required),
+      price: new FormControl('', Validators.required),
+      quantity: new FormControl('', Validators.required),
+      status: new FormControl('', Validators.required),
+      supplierId: new FormControl('', Validators.required)
     });
 
     this.loadData();
