@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 
 import { environment } from './../../environments/environment';
 import { Product } from './product';
+import { Supplier } from './../suppliers/supplier';
 
 @Component({
   selector: 'app-product-edit',
@@ -15,6 +16,8 @@ export class ProductEditComponent implements OnInit {
   title?: string;
   form!: FormGroup;
   product?: Product;
+  id?: string;
+  suppliers?: Supplier[];
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private http: HttpClient) { }
 
@@ -24,28 +27,46 @@ export class ProductEditComponent implements OnInit {
       description: new FormControl(''),
       price: new FormControl(0),
       quantity: new FormControl(0),
-      status: new FormControl('')
+      status: new FormControl(''),
+      supplierId: new FormControl('')
     });
 
     this.loadData();
   }
 
   loadData() {
+    this.loadSuppliers();
+
     var idParam = this.activatedRoute.snapshot.paramMap.get('id');
-    var id = idParam ? idParam : '';
+    this.id = idParam ? idParam : undefined;
 
-    var url = environment.baseUrl + 'api/Products/' + id;
-    this.http.get<Product>(url).subscribe(result => {
-      this.product = result;
-      this.title = "Edit - " + this.product.name
+    if (this.id) {
+      var url = environment.baseUrl + 'api/Products/' + this.id;
+      this.http.get<Product>(url).subscribe(result => {
+        this.product = result;
+        this.title = "Edit - " + this.product.name
 
-      this.form.patchValue(this.product);
+        this.form.patchValue(this.product);
 
+      }, error => console.error(error));
+    } else {
+      this.title = "Create a new product";
+    }
+  }
+
+  loadSuppliers() {
+    var url = environment.baseUrl + 'api/Suppliers';
+    var params = new HttpParams()
+      .set("pageIndex", "0")
+      .set("pageSize", "9999")
+      .set("sortColumn", "name");
+    this.http.get<any>(url, { params }).subscribe(result => {
+      this.suppliers = result.data;
     }, error => console.error(error));
   }
 
   onSubmit() {
-    var product = this.product;
+    var product = this.id ? this.product : <Product>{};
 
     if (product) {
       product.name = this.form.controls['name'].value;
@@ -53,17 +74,27 @@ export class ProductEditComponent implements OnInit {
       product.price = this.form.controls['price'].value;
       product.quantity = this.form.controls['quantity'].value;
       product.status = this.form.controls['status'].value;
+      product.supplierId = this.form.controls['supplierId'].value;
+
+      if (this.id) {
+        var url = environment.baseUrl + 'api/Products/' + product?.productId;
+
+        this.http
+          .put<Product>(url, product)
+          .subscribe(result => {
+            console.log("Product " + product?.productId + " has been updated.");
+
+            this.router.navigate(['/products']);
+          }, error => console.error(error));
+      } else {
+        var url = environment.baseUrl + 'api/Products/';
+        this.http
+          .post<Product>(url, product)
+          .subscribe(result => {
+            console.log("Product " + result.productId + " has been created");
+            this.router.navigate(['/products']);
+          }, error => console.error(error));
+      }
     }
-
-    var url = environment.baseUrl + 'api/Products/' + product?.productId;
-
-    this.http
-      .put<Product>(url, product)
-      .subscribe(result => {
-        console.log("Product " + product?.productId + " has been updated.");
-
-        this.router.navigate(['/products']);
-      }, error => console.error(error));
   }
-
 }
