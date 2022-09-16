@@ -64,6 +64,11 @@ namespace Server.Controllers
                 return BadRequest();
             }
 
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             _context.Entry(supplier).State = EntityState.Modified;
 
             try

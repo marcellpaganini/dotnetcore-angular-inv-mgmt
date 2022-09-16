@@ -66,6 +66,11 @@ namespace Server.Controllers
 
             _context.Entry(product).State = EntityState.Modified;
 
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             try
             {
                 await _context.SaveChangesAsync();
@@ -90,10 +95,16 @@ namespace Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Product>> PostProduct(Product product)
         {
-          if (_context.Products == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.Products'  is null.");
-          }
+            if (_context.Products == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Products'  is null.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
 

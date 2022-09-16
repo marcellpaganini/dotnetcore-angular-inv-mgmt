@@ -6,6 +6,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { environment } from './../../environments/environment';
 import { Product } from './product';
 import { Supplier } from './../suppliers/supplier';
+import { handleErrors } from '../shared/errorHandling';
+
 
 @Component({
   selector: 'app-product-edit',
@@ -85,7 +87,7 @@ export class ProductEditComponent implements OnInit {
             console.log("Product " + product?.productId + " has been updated.");
 
             this.router.navigate(['/products']);
-          }, error => console.error(error));
+          }, error => handleErrors(error, this.form));
       } else {
         var url = environment.baseUrl + 'api/Products/';
         this.http
@@ -93,7 +95,7 @@ export class ProductEditComponent implements OnInit {
           .subscribe(result => {
             console.log("Product " + result.productId + " has been created");
             this.router.navigate(['/products']);
-          }, error => console.error(error));
+          }, error => handleErrors(error, this.form));
       }
     }
   }
