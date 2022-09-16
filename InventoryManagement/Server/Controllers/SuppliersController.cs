@@ -90,10 +90,16 @@ namespace Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Supplier>> PostSupplier(Supplier supplier)
         {
-          if (_context.Suppliers == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.Suppliers'  is null.");
-          }
+            if (_context.Suppliers == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.Suppliers'  is null.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             _context.Suppliers.Add(supplier);
             await _context.SaveChangesAsync();
 

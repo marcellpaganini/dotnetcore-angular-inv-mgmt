@@ -6,26 +6,56 @@
     <mat-form-field>
       <mat-label>Name:</mat-label>
       <input matInput formControlName="name" required placeholder="Type a name" />
+      <mat-error *ngIf="this.form.controls['name'].errors?.['required']">
+        Name is required
+      </mat-error>
+      <mat-error *ngIf="this.form.controls['name'].errors?.['serverError']">
+        {{this.form.controls['name'].errors?.['serverError']}}
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Address:</mat-label>
       <input matInput formControlName="address" required placeholder="Type an address" />
+      <mat-error *ngIf="this.form.controls['address'].errors?.['required']">
+        Address is required
+      </mat-error>
+      <mat-error *ngIf="this.form.controls['address'].errors?.['serverError']">
+        {{this.form.controls['address'].errors?.['serverError']}}
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Province:</mat-label>
       <input matInput formControlName="province" required placeholder="Type a province" />
+      <mat-error *ngIf="this.form.controls['province'].errors?.['required']">
+        Province is required
+      </mat-error>
+      <mat-error *ngIf="this.form.controls['province'].errors?.['serverError']">
+        {{this.form.controls['province'].errors?.['serverError']}}
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Phone:</mat-label>
       <input matInput formControlName="phone" required placeholder="Type a phone number" />
+      <mat-error *ngIf="this.form.controls['phone'].errors?.['required']">
+        Phone is required
+      </mat-error>
+      <mat-error *ngIf="this.form.controls['phone'].errors?.['serverError']">
+        {{this.form.controls['phone'].errors?.['serverError']}}
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Email:</mat-label>
       <input matInput formControlName="email" required placeholder="Type an email" />
+      <mat-error *ngIf="this.form.controls['email'].errors?.['required']">
+        Email is required
+      </mat-error>
+      <mat-error *ngIf="this.form.controls['email'].errors?.['serverError']">
+        {{this.form.controls['email'].errors?.['serverError']}}
+      </mat-error>
     </mat-form-field>
 
     <div>
