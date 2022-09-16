@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 
 import { environment } from './../../environments/environment';
 import { Supplier } from './supplier';
+import { handleErrors } from '../shared/errorHandling';
+
 
 @Component({
   selector: 'app-supplier-edit',
@@ -68,7 +70,7 @@ export class SupplierEditComponent implements OnInit {
             console.log("Supplier " + supplier?.supplierId + " has been updated.");
 
             this.router.navigate(['/suppliers']);
-          }, error => console.error(error));
+          }, error => handleErrors(error, this.form));
       } else {
         var url = environment.baseUrl + 'api/Suppliers/';
         this.http
@@ -76,7 +78,7 @@ export class SupplierEditComponent implements OnInit {
           .subscribe(result => {
             console.log("Supplier " + result.supplierId + " has been created");
             this.router.navigate(['/suppliers']);
-          }, error => console.error(error));
+          }, error => handleErrors(error, this.form));
       }
     }
   }

@@ -6,64 +6,70 @@
     <mat-form-field>
       <mat-label>Name:</mat-label>
       <input matInput formControlName="name" required placeholder="Type a name" />
-    </mat-form-field>
-    <div *ngIf="this.form.controls['name']!.invalid && (this.form.controls['name']!.dirty || this.form.controls['name']!.touched)">
       <mat-error *ngIf="this.form.controls['name'].errors?.['required']">
         Name is required
       </mat-error>
-    </div>
+      <mat-error *ngIf="this.form.controls['name'].errors?.['serverError']">
+        {{this.form.controls['name'].errors?.['serverError']}}
+      </mat-error>
+    </mat-form-field>
 
     <mat-form-field>
       <mat-label>Description:</mat-label>
       <input matInput formControlName="description" required placeholder="Type a description" />
-    </mat-form-field>
-    <div *ngIf="this.form.controls['description'].invalid && (this.form.controls['description'].dirty || this.form.controls['description'].touched)">
       <mat-error *ngIf="this.form.controls['description'].errors?.['required']">
         Description is required
       </mat-error>
-    </div>
+      <mat-error *ngIf="this.form.controls['description'].errors?.['serverError']">
+        {{this.form.controls['description'].errors?.['serverError']}}
+      </mat-error>
+    </mat-form-field>
 
     <mat-form-field>
       <mat-label>Price($):</mat-label>
       <input matInput formControlName="price" required placeholder="Insert a price" />
-    </mat-form-field>
-    <div *ngIf="this.form.controls['price'].invalid && (this.form.controls['price'].dirty || this.form.controls['price'].touched)">
       <mat-error *ngIf="this.form.controls['price'].errors?.['required']">
         Price is required
       </mat-error>
-    </div>
+      <mat-error *ngIf="this.form.controls['price'].errors?.['serverError']">
+        {{this.form.controls['price'].errors?.['serverError']}}
+      </mat-error>
+    </mat-form-field>
 
     <mat-form-field>
       <mat-label>Quantity:</mat-label>
       <input matInput formControlName="quantity" required placeholder="Insert a quantity" />
-    </mat-form-field>
-    <div *ngIf="this.form.controls['quantity'].invalid && (this.form.controls['quantity'].dirty || this.form.controls['quantity'].touched)">
       <mat-error *ngIf="this.form.controls['quantity'].errors?.['required']">
         Quantity is required
       </mat-error>
-    </div>
+      <mat-error *ngIf="this.form.controls['quantity'].errors?.['serverError']">
+        {{this.form.controls['quantity'].errors?.['serverError']}}
+      </mat-error>
+    </mat-form-field>
 
     <mat-form-field>
       <mat-label>Status:</mat-label>
       <input matInput formControlName="status" required placeholder="Type a status" />
-    </mat-form-field>
-    <div *ngIf="this.form.controls['status'].invalid && (this.form.controls['status'].dirty || this.form.controls['status'].touched)">
       <mat-error *ngIf="this.form.controls['status'].errors?.['required']">
         Status is required
       </mat-error>
-    </div>
+      <mat-error *ngIf="this.form.controls['status'].errors?.['serverError']">
+        {{this.form.controls['status'].errors?.['serverError']}}
+      </mat-error>
+    </mat-form-field>
 
     <mat-form-field *ngIf="suppliers">
       <mat-label>Select a supplier</mat-label>
       <mat-select id="supplierId" formControlName="supplierId">
         <mat-option *ngFor="let supplier of suppliers" [value]="supplier.supplierId">{{supplier.name}}</mat-option>
       </mat-select>
+        <mat-error *ngIf="this.form.controls['supplierId'].errors?.['required']">
+          Please select a supplier
+        </mat-error>
+        <mat-error *ngIf="this.form.controls['supplierId'].errors?.['serverError']">
+          {{this.form.controls['supplierId'].errors?.['serverError']}}
+        </mat-error>
     </mat-form-field>
-    <div *ngIf="this.form.controls['supplierId'].invalid && (this.form.controls['supplierId'].dirty || this.form.controls['supplierId'].touched)">
-      <mat-error *ngIf="this.form.controls['supplierId'].errors?.['required']">
-        Please select a supplier
-      </mat-error>
-    </div>
 
     <div>
       <button mat-flat-button color="primary" type="submit">{{this.id ? "Save" : "Create"}}</button>
