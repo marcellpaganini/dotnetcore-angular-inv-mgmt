@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "aeeGLNdJ2NMCQEdw2NZ8UjrJQn405vFw+TU9N1o7DGsnVMR51YJJ7nLrMEt1tm6oViYgoBmLaBKQf0qA6ZoAvQ==",
+  "dgSpecHash": "sz47zf5kCBaVAxR5mierAsQkSERuFSOBo4SKh4MnjbG8UeS+58zs/vj3rTDiXKeW5L4nfVDpF6sPbOb1z+UQVQ==",
   "success": true,
   "projectFilePath": "C:\\src\\MyProjects\\dotnetcore-angular-inventory-management\\InventoryManagement\\Server\\Server.csproj",
   "expectedPackageFiles": [
