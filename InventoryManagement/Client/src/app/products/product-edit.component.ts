@@ -88,7 +88,7 @@ export class ProductEditComponent extends BaseFormComponent implements OnInit {
             console.log("Product " + product?.productId + " has been updated.");
 
             this.router.navigate(['/products']);
-          }, error => this.handleErrors(error, this.form));
+          }, error => this.handleErrors(error));
       } else {
         var url = environment.baseUrl + 'api/Products/';
         this.http
@@ -96,7 +96,7 @@ export class ProductEditComponent extends BaseFormComponent implements OnInit {
           .subscribe(result => {
             console.log("Product " + result.productId + " has been created");
             this.router.navigate(['/products']);
-          }, error => this.handleErrors(error, this.form));
+          }, error => this.handleErrors(error));
       }
     }
   }

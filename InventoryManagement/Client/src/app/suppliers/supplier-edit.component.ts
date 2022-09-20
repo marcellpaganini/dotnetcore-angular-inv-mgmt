@@ -71,7 +71,7 @@ export class SupplierEditComponent extends BaseFormComponent implements OnInit {
             console.log("Supplier " + supplier?.supplierId + " has been updated.");
 
             this.router.navigate(['/suppliers']);
-          }, error => this.handleErrors(error, this.form));
+          }, error => this.handleErrors(error));
       } else {
         var url = environment.baseUrl + 'api/Suppliers/';
         this.http
@@ -79,7 +79,7 @@ export class SupplierEditComponent extends BaseFormComponent implements OnInit {
           .subscribe(result => {
             console.log("Supplier " + result.supplierId + " has been created");
             this.router.navigate(['/suppliers']);
-          }, error => this.handleErrors(error, this.form));
+          }, error => this.handleErrors(error));
       }
     }
   }
