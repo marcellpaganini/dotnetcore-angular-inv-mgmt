@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -16,7 +16,7 @@ import { Product } from './product';
 })
 
 export class ProductsComponent implements OnInit {
-  public displayedColumns: string[] = ['name', 'description', 'price', 'status', 'quantity'];
+  public displayedColumns: string[] = ['name', 'description', 'price', 'status', 'quantity', 'kebabMenu'];
   public products!: MatTableDataSource<Product>;
   defaultPageIndex: number = 0;
   defaultPageSize: number = 10;
@@ -27,6 +27,11 @@ export class ProductsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   filterTextChanged: Subject<string> = new Subject<string>();
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+  id?: string;
+  product?: Product;
 
   constructor(private http: HttpClient) { }
 
@@ -79,5 +84,21 @@ export class ProductsComponent implements OnInit {
         this.paginator.pageSize = result.pageSize;
         this.products = new MatTableDataSource<Product>(result.data);
       }, error => console.error(error));
+  }
+
+  onDelete(id: string) {
+    this.product = this.products.data.find(p => p.productId === id);
+
+    if (id) {
+      var url = environment.baseUrl + 'api/Products/' + id;
+      if (confirm("Are you sure?") == true) {
+        this.http
+          .delete<Product>(url)
+          .subscribe(result => {
+            console.log("Product " + id + " has been deleted");
+          }, error => console.error(error));
+        this.loadData();
+      }
+    }
   }
 }

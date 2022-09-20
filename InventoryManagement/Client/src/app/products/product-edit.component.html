@@ -6,7 +6,7 @@
     <mat-form-field>
       <mat-label>Name:</mat-label>
       <input matInput formControlName="name" required placeholder="Type a name" />
-      <mat-error *ngIf="this.form.controls['name'].errors?.['required']">
+      <mat-error *ngIf="form.controls['name'].errors?.['required']">
         Name is required
       </mat-error>
       <mat-error *ngIf="this.form.controls['name'].errors?.['serverError']">

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, AbstractControl } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
@@ -7,9 +7,9 @@ import { HttpErrorResponse } from "@angular/common/http";
 })
 
 export class BaseFormComponent {
-  form!: FormGroup;
+  form!: FormGroup<any>;
 
-  handleErrors = (error: any, form: FormGroup<any>) => {
+  handleErrors = (error: any) => {
     if (error instanceof HttpErrorResponse) {
       const errorMessages = error.error;
       if (error.status === 400) {
@@ -17,7 +17,7 @@ export class BaseFormComponent {
 
         for (let title in errorTitles) {
           const errorTitle = errorTitles[Number(title)];
-          const formControl = form.controls[errorTitle.toLowerCase()];
+          const formControl = this.form.controls[errorTitle.toLowerCase()];
 
           if (formControl) {
             formControl.setErrors({
