@@ -6,7 +6,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { environment } from './../../environments/environment';
 import { Product } from './product';
 import { Supplier } from './../suppliers/supplier';
-import { handleErrors } from '../shared/errorHandling';
+import { BaseFormComponent } from '../base-form.component';
 
 
 @Component({
@@ -14,14 +14,15 @@ import { handleErrors } from '../shared/errorHandling';
   templateUrl: './product-edit.component.html',
   styleUrls: ['./product-edit.component.scss']
 })
-export class ProductEditComponent implements OnInit {
+export class ProductEditComponent extends BaseFormComponent implements OnInit {
   title?: string;
-  form!: FormGroup;
   product?: Product;
   id?: string;
   suppliers?: Supplier[];
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private http: HttpClient) { }
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private http: HttpClient) {
+    super();
+  }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -87,7 +88,7 @@ export class ProductEditComponent implements OnInit {
             console.log("Product " + product?.productId + " has been updated.");
 
             this.router.navigate(['/products']);
-          }, error => handleErrors(error, this.form));
+          }, error => this.handleErrors(error, this.form));
       } else {
         var url = environment.baseUrl + 'api/Products/';
         this.http
@@ -95,7 +96,7 @@ export class ProductEditComponent implements OnInit {
           .subscribe(result => {
             console.log("Product " + result.productId + " has been created");
             this.router.navigate(['/products']);
-          }, error => handleErrors(error, this.form));
+          }, error => this.handleErrors(error, this.form));
       }
     }
   }

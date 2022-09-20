@@ -5,7 +5,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 import { environment } from './../../environments/environment';
 import { Supplier } from './supplier';
-import { handleErrors } from '../shared/errorHandling';
+import { BaseFormComponent } from '../base-form.component';
 
 
 @Component({
@@ -13,13 +13,14 @@ import { handleErrors } from '../shared/errorHandling';
   templateUrl: './supplier-edit.component.html',
   styleUrls: ['./supplier-edit.component.scss']
 })
-export class SupplierEditComponent implements OnInit {
+export class SupplierEditComponent extends BaseFormComponent implements OnInit {
   title?: string;
-  form!: FormGroup;
   supplier?: Supplier;
   id?: string;
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private http: HttpClient) { }
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private http: HttpClient) {
+    super();
+  }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -70,7 +71,7 @@ export class SupplierEditComponent implements OnInit {
             console.log("Supplier " + supplier?.supplierId + " has been updated.");
 
             this.router.navigate(['/suppliers']);
-          }, error => handleErrors(error, this.form));
+          }, error => this.handleErrors(error, this.form));
       } else {
         var url = environment.baseUrl + 'api/Suppliers/';
         this.http
@@ -78,7 +79,7 @@ export class SupplierEditComponent implements OnInit {
           .subscribe(result => {
             console.log("Supplier " + result.supplierId + " has been created");
             this.router.navigate(['/suppliers']);
-          }, error => handleErrors(error, this.form));
+          }, error => this.handleErrors(error, this.form));
       }
     }
   }
