@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 import { environment } from './../../environments/environment';
 import { Product } from './product';
@@ -20,7 +22,7 @@ export class ProductEditComponent extends BaseFormComponent implements OnInit {
   id?: string;
   suppliers?: Supplier[];
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private http: HttpClient) {
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private http: HttpClient, private _snackBar: MatSnackBar) {
     super();
   }
 
@@ -85,8 +87,7 @@ export class ProductEditComponent extends BaseFormComponent implements OnInit {
         this.http
           .put<Product>(url, product)
           .subscribe(result => {
-            console.log("Product " + product?.productId + " has been updated.");
-
+            this._snackBar.open("Product " + product?.name + " has been updated.", "Dismiss");
             this.router.navigate(['/products']);
           }, error => this.handleErrors(error));
       } else {
@@ -94,7 +95,7 @@ export class ProductEditComponent extends BaseFormComponent implements OnInit {
         this.http
           .post<Product>(url, product)
           .subscribe(result => {
-            console.log("Product " + result.productId + " has been created");
+            this._snackBar.open("Product " + result.name + " has been created", "Dismiss");
             this.router.navigate(['/products']);
           }, error => this.handleErrors(error));
       }

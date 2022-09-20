@@ -4,6 +4,7 @@ import { environment } from './../../environments/environment';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Supplier } from './supplier';
@@ -33,7 +34,7 @@ export class SuppliersComponent implements OnInit {
   id?: string;
   supplier?: Supplier;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.loadData();
@@ -95,7 +96,7 @@ export class SuppliersComponent implements OnInit {
         this.http
           .delete<Supplier>(url)
           .subscribe(result => {
-            console.log("Supplier " + id + " has been deleted");
+            this._snackBar.open("Supplier " + this.supplier?.name + " has been deleted.", "Dismiss");
           }, error => console.error(error));
         this.loadData();
       }
