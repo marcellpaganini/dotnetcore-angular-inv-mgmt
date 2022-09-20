@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { environment } from './../../environments/environment';
 import { Supplier } from './supplier';
@@ -18,7 +19,7 @@ export class SupplierEditComponent extends BaseFormComponent implements OnInit {
   supplier?: Supplier;
   id?: string;
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private http: HttpClient) {
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private http: HttpClient, private _snackBar: MatSnackBar) {
     super();
   }
 
@@ -68,7 +69,7 @@ export class SupplierEditComponent extends BaseFormComponent implements OnInit {
         this.http
           .put<Supplier>(url, supplier)
           .subscribe(result => {
-            console.log("Supplier " + supplier?.supplierId + " has been updated.");
+            this._snackBar.open("Supplier " + supplier?.name + " has been updated.", "Dismiss");
 
             this.router.navigate(['/suppliers']);
           }, error => this.handleErrors(error));
@@ -77,7 +78,7 @@ export class SupplierEditComponent extends BaseFormComponent implements OnInit {
         this.http
           .post<Supplier>(url, supplier)
           .subscribe(result => {
-            console.log("Supplier " + result.supplierId + " has been created");
+            this._snackBar.open("Supplier " + result.name + " has been created", "Dismiss");
             this.router.navigate(['/suppliers']);
           }, error => this.handleErrors(error));
       }

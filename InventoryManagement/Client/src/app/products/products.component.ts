@@ -4,9 +4,11 @@ import { environment } from './../../environments/environment';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Product } from './product';
+
 
 
 @Component({
@@ -33,7 +35,7 @@ export class ProductsComponent implements OnInit {
   id?: string;
   product?: Product;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.loadData();
@@ -95,7 +97,7 @@ export class ProductsComponent implements OnInit {
         this.http
           .delete<Product>(url)
           .subscribe(result => {
-            console.log("Product " + id + " has been deleted");
+            this._snackBar.open("Product " + this.product?.name + " has been deleted.", "Dismiss");
           }, error => console.error(error));
         this.loadData();
       }
