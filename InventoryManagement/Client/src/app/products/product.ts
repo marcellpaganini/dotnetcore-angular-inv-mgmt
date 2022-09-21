@@ -6,4 +6,5 @@ export interface Product {
   quantity: number;
   status: string;
   supplierId: string;
+  supplierName: string;
 }
