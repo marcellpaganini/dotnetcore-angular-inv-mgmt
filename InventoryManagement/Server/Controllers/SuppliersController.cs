@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
+using Server.Data.DTOs;
 using Server.Data.Models;
 
 namespace Server.Controllers
@@ -23,7 +25,7 @@ namespace Server.Controllers
 
         // GET: api/Suppliers
         [HttpGet]
-        public async Task<ActionResult<ApiResult<Supplier>>> GetSuppliers(int pageIndex = 0, int pageSize = 10, 
+        public async Task<ActionResult<ApiResult<SupplierDTO>>> GetSuppliers(int pageIndex = 0, int pageSize = 10, 
                                                                           string? sortColumn = null, string? sortOrder = null,
                                                                           string? filterColumn = null, string? filterQuery = null)
         {
@@ -31,8 +33,18 @@ namespace Server.Controllers
           {
               return NotFound();
           }
-            return await ApiResult<Supplier>.CreateAsync(
-                _context.Suppliers.AsNoTracking(),
+            return await ApiResult<SupplierDTO>.CreateAsync(
+                _context.Suppliers.AsNoTracking()
+                .Select(s => new SupplierDTO()
+                {
+                    SupplierId = s.SupplierId,
+                    Name = s.Name,
+                    Address = s.Address,
+                    Province = s.Province,
+                    Phone = s.Phone,
+                    Email = s.Email,
+                    TotalProducts = s.Products!.Count
+                }),
                 pageIndex, pageSize, sortColumn, sortOrder, filterColumn, filterQuery);
         }
 

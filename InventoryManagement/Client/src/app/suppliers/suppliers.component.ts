@@ -17,7 +17,7 @@ import { Supplier } from './supplier';
 })
 
 export class SuppliersComponent implements OnInit {
-  public displayedColumns: string[] = ['name', 'address', 'province', 'phone', 'email', 'kebabMenu']
+  public displayedColumns: string[] = ['name', 'address', 'province', 'phone', 'email', 'totalProducts', 'kebabMenu']
   public suppliers!: MatTableDataSource<Supplier>;
   defaultPageIndex: number = 0;
   defaultPageSize: number = 10;

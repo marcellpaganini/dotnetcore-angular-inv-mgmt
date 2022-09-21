@@ -5,4 +5,5 @@ export interface Supplier {
   province: string;
   phone: string;
   email: string;
+  totalProducts: number;
 }
