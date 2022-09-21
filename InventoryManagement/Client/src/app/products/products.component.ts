@@ -18,7 +18,7 @@ import { Product } from './product';
 })
 
 export class ProductsComponent implements OnInit {
-  public displayedColumns: string[] = ['name', 'description', 'price', 'status', 'quantity', 'kebabMenu'];
+  public displayedColumns: string[] = ['name', 'description', 'price', 'status', 'quantity', 'supplierName', 'kebabMenu'];
   public products!: MatTableDataSource<Product>;
   defaultPageIndex: number = 0;
   defaultPageSize: number = 10;

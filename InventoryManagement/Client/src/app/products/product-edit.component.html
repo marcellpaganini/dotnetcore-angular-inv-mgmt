@@ -1,7 +1,7 @@
 <div class="product-edit">
   <h1>{{title}}</h1>
   <p *ngIf="this.id && !product"><em>Loading...</em></p>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form [formGroup]="this.form" (ngSubmit)="onSubmit()">
 
     <mat-form-field>
       <mat-label>Name:</mat-label>

@@ -38,6 +38,11 @@
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantity</th>
     <td mat-cell *matCellDef="let product">{{ product.quantity }}</td>
   </ng-container>
+  <ng-container matColumnDef="supplierName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Supplier</th>
+    <td mat-cell *matCellDef="let product">
+      <a [routerLink]="['/supplier', product.supplierId]">{{ product.supplierName }}</a></td>
+  </ng-container>
   <ng-container matColumnDef="kebabMenu">
     <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
     <td mat-cell *matCellDef="let product">

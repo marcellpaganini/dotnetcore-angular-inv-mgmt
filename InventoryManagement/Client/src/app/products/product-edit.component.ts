@@ -8,7 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { environment } from './../../environments/environment';
 import { Product } from './product';
 import { Supplier } from './../suppliers/supplier';
-import { BaseFormComponent } from '../base-form.component';
+import { BaseFormComponent } from './../base-form.component';
 
 
 @Component({
