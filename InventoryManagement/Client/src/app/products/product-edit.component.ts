@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -9,6 +8,8 @@ import { environment } from './../../environments/environment';
 import { Product } from './product';
 import { Supplier } from './../suppliers/supplier';
 import { BaseFormComponent } from './../base-form.component';
+import { ProductService } from './product.service';
+import { ApiResult } from '../base.service';
 
 
 @Component({
@@ -22,7 +23,11 @@ export class ProductEditComponent extends BaseFormComponent implements OnInit {
   id?: string;
   suppliers?: Supplier[];
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private http: HttpClient, private _snackBar: MatSnackBar) {
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private _snackBar: MatSnackBar,
+    private productService: ProductService) {
     super();
   }
 
@@ -47,7 +52,7 @@ export class ProductEditComponent extends BaseFormComponent implements OnInit {
 
     if (this.id) {
       var url = environment.baseUrl + 'api/Products/' + this.id;
-      this.http.get<Product>(url).subscribe(result => {
+      this.productService.get(this.id).subscribe(result => {
         this.product = result;
         this.title = "Edit - " + this.product.name
 
@@ -60,12 +65,13 @@ export class ProductEditComponent extends BaseFormComponent implements OnInit {
   }
 
   loadSuppliers() {
-    var url = environment.baseUrl + 'api/Suppliers';
-    var params = new HttpParams()
-      .set("pageIndex", "0")
-      .set("pageSize", "9999")
-      .set("sortColumn", "name");
-    this.http.get<any>(url, { params }).subscribe(result => {
+    this.productService.getSuppliers(
+      0,
+      9999,
+      "name",
+      "asc",
+      null,
+      null,).subscribe(result => {
       this.suppliers = result.data;
     }, error => console.error(error));
   }
@@ -82,18 +88,16 @@ export class ProductEditComponent extends BaseFormComponent implements OnInit {
       product.supplierId = this.form.controls['supplierId'].value;
 
       if (this.id) {
-        var url = environment.baseUrl + 'api/Products/' + product?.productId;
 
-        this.http
-          .put<Product>(url, product)
+        this.productService
+          .put(product)
           .subscribe(result => {
             this._snackBar.open("Product " + product?.name + " has been updated.", "Dismiss");
             this.router.navigate(['/products']);
           }, error => this.handleErrors(error));
       } else {
-        var url = environment.baseUrl + 'api/Products/';
-        this.http
-          .post<Product>(url, product)
+        this.productService
+          .post(product)
           .subscribe(result => {
             this._snackBar.open("Product " + result.name + " has been created", "Dismiss");
             this.router.navigate(['/products']);
