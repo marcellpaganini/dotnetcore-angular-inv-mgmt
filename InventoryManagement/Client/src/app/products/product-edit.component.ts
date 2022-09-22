@@ -3,13 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-
-import { environment } from './../../environments/environment';
 import { Product } from './product';
 import { Supplier } from './../suppliers/supplier';
 import { BaseFormComponent } from './../base-form.component';
 import { ProductService } from './product.service';
-import { ApiResult } from '../base.service';
 
 
 @Component({
@@ -51,7 +48,6 @@ export class ProductEditComponent extends BaseFormComponent implements OnInit {
     this.id = idParam ? idParam : undefined;
 
     if (this.id) {
-      var url = environment.baseUrl + 'api/Products/' + this.id;
       this.productService.get(this.id).subscribe(result => {
         this.product = result;
         this.title = "Edit - " + this.product.name
@@ -88,7 +84,6 @@ export class ProductEditComponent extends BaseFormComponent implements OnInit {
       product.supplierId = this.form.controls['supplierId'].value;
 
       if (this.id) {
-
         this.productService
           .put(product)
           .subscribe(result => {

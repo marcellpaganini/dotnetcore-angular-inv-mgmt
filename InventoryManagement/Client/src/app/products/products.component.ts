@@ -7,7 +7,6 @@ import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Product } from './product';
 import { ProductService } from './product.service';
-import { ApiResult } from '../base.service';
 
 
 @Component({

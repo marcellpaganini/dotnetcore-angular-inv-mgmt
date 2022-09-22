@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { environment } from './../../environments/environment';
 import { Supplier } from './supplier';
 import { BaseFormComponent } from './../base-form.component';
+import { SupplierService } from './supplier.service';
 
 
 @Component({
@@ -19,7 +18,11 @@ export class SupplierEditComponent extends BaseFormComponent implements OnInit {
   supplier?: Supplier;
   id?: string;
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private http: HttpClient, private _snackBar: MatSnackBar) {
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private _snackBar: MatSnackBar,
+    private supplierService: SupplierService) {
     super();
   }
 
@@ -40,8 +43,7 @@ export class SupplierEditComponent extends BaseFormComponent implements OnInit {
     this.id = idParam ? idParam : undefined;
 
     if (this.id) {
-      var url = environment.baseUrl + 'api/Suppliers/' + this.id;
-      this.http.get<Supplier>(url).subscribe(result => {
+      this.supplierService.get(this.id).subscribe(result => {
         this.supplier = result;
         this.title = "Edit - " + this.supplier.name
 
@@ -64,19 +66,15 @@ export class SupplierEditComponent extends BaseFormComponent implements OnInit {
       supplier.email = this.form.controls['email'].value;
 
       if (this.id) {
-        var url = environment.baseUrl + 'api/Suppliers/' + supplier?.supplierId;
-
-        this.http
-          .put<Supplier>(url, supplier)
+        this.supplierService
+          .put(supplier)
           .subscribe(result => {
             this._snackBar.open("Supplier " + supplier?.name + " has been updated.", "Dismiss");
-
             this.router.navigate(['/suppliers']);
           }, error => this.handleErrors(error));
       } else {
-        var url = environment.baseUrl + 'api/Suppliers/';
-        this.http
-          .post<Supplier>(url, supplier)
+        this.supplierService
+          .post(supplier)
           .subscribe(result => {
             this._snackBar.open("Supplier " + result.name + " has been created", "Dismiss");
             this.router.navigate(['/suppliers']);
