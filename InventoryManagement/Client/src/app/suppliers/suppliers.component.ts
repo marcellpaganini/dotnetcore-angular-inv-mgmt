@@ -1,6 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { environment } from './../../environments/environment';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -8,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Supplier } from './supplier';
+import { SupplierService } from './supplier.service';
 
 
 @Component({
@@ -28,13 +27,10 @@ export class SuppliersComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   filterTextChanged: Subject<string> = new Subject<string>();
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
   id?: string;
   supplier?: Supplier;
 
-  constructor(private http: HttpClient, private _snackBar: MatSnackBar) { }
+  constructor(private supplierService: SupplierService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.loadData();
@@ -60,41 +56,35 @@ export class SuppliersComponent implements OnInit {
   }
 
   getData(event: PageEvent) {
-    var url = environment.baseUrl + 'api/Suppliers';
-    var params = new HttpParams()
-      .set("pageIndex", event.pageIndex.toString())
-      .set("pageSize", event.pageSize.toString())
-      .set("sortColumn", (this.sort)
-        ? this.sort.active
-        : this.defaultSortColumn)
-      .set("sortOrder", (this.sort)
-        ? this.sort.direction
-        : this.defaultSortOrder);
+    var sortColumn = (this.sort) ? this.sort.active : this.defaultSortColumn;
+    var sortOrder = (this.sort) ? this.sort.direction : this.defaultSortOrder;
 
-    if (this.filterQuery) {
-      params = params
-        .set("filterColumn", this.defaultFilterColumn)
-        .set("filterQuery", this.filterQuery);
-    }
+    var filterColumn = (this.filterQuery) ? this.defaultFilterColumn : null;
+    var filterQuery = (this.filterQuery) ? this.filterQuery : null;
 
-    this.http.get<any>(url, { params })
+    this.supplierService.getData(
+      event.pageIndex,
+      event.pageSize,
+      sortColumn,
+      sortOrder,
+      filterColumn,
+      filterQuery)
       .subscribe(result => {
-        console.log(result);
         this.paginator.length = result.totalCount;
         this.paginator.pageIndex = result.pageIndex;
         this.paginator.pageSize = result.pageSize;
         this.suppliers = new MatTableDataSource<Supplier>(result.data);
       }, error => console.error(error));
   }
+  
 
   onDelete(id: string) {
-    this.supplier = this.suppliers.data.find(s => s.supplierId === id);
+    this.supplier = this.suppliers.data.find(p => p.supplierId === id);
 
     if (id) {
-      var url = environment.baseUrl + 'api/Suppliers/' + id;
       if (confirm("Are you sure?") == true) {
-        this.http
-          .delete<Supplier>(url)
+        this.supplierService
+          .delete(id)
           .subscribe(result => {
             this._snackBar.open("Supplier " + this.supplier?.name + " has been deleted.", "Dismiss");
           }, error => console.error(error));
