@@ -1,6 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { environment } from './../../environments/environment';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -8,7 +6,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Product } from './product';
-
+import { ProductService } from './product.service';
+import { ApiResult } from '../base.service';
 
 
 @Component({
@@ -29,13 +28,10 @@ export class ProductsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   filterTextChanged: Subject<string> = new Subject<string>();
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
   id?: string;
   product?: Product;
 
-  constructor(private http: HttpClient, private _snackBar: MatSnackBar) { }
+  constructor(private productService: ProductService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.loadData();
@@ -61,26 +57,20 @@ export class ProductsComponent implements OnInit {
   }
 
   getData(event: PageEvent) {
-    var url = environment.baseUrl + 'api/Products';
-    var params = new HttpParams()
-      .set("pageIndex", event.pageIndex.toString())
-      .set("pageSize", event.pageSize.toString())
-      .set("sortColumn", (this.sort)
-        ? this.sort.active
-        : this.defaultSortColumn)
-      .set("sortOrder", (this.sort)
-        ? this.sort.direction
-        : this.defaultSortOrder);
+    var sortColumn = (this.sort) ? this.sort.active : this.defaultSortColumn;
+    var sortOrder = (this.sort) ? this.sort.direction : this.defaultSortOrder;
 
-    if (this.filterQuery) {
-      params = params
-        .set("filterColumn", this.defaultFilterColumn)
-        .set("filterQuery", this.filterQuery);
-    }
+    var filterColumn = (this.filterQuery) ? this.defaultFilterColumn : null;
+    var filterQuery = (this.filterQuery) ? this.filterQuery : null;
 
-    this.http.get<any>(url, { params })
+    this.productService.getData(
+      event.pageIndex,
+      event.pageSize,
+      sortColumn,
+      sortOrder,
+      filterColumn,
+      filterQuery)
       .subscribe(result => {
-        console.log(result);
         this.paginator.length = result.totalCount;
         this.paginator.pageIndex = result.pageIndex;
         this.paginator.pageSize = result.pageSize;
@@ -92,10 +82,9 @@ export class ProductsComponent implements OnInit {
     this.product = this.products.data.find(p => p.productId === id);
 
     if (id) {
-      var url = environment.baseUrl + 'api/Products/' + id;
       if (confirm("Are you sure?") == true) {
-        this.http
-          .delete<Product>(url)
+        this.productService
+          .delete(id)
           .subscribe(result => {
             this._snackBar.open("Product " + this.product?.name + " has been deleted.", "Dismiss");
           }, error => console.error(error));

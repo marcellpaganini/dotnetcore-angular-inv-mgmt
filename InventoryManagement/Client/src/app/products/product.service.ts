@@ -36,12 +36,12 @@ export class ProductService extends BaseService<Product> {
   }
 
   get(id: string): Observable<Product> {
-    var url = this.getUrl("api/Products" + id);
+    var url = this.getUrl("api/Products/" + id);
     return this.http.get<Product>(url);
   }
 
   put(item: Product): Observable<Product> {
-    var url = this.getUrl("api/Products" + item.productId);
+    var url = this.getUrl("api/Products/" + item.productId);
     return this.http.put<Product>(url, item);
   }
 
@@ -51,7 +51,7 @@ export class ProductService extends BaseService<Product> {
   }
 
   delete(id: string): Observable<Product> {
-    var url = this.getUrl("api/Products" + id);
+    var url = this.getUrl("api/Products/" + id);
     return this.http.delete<Product>(url);
   }
 }
