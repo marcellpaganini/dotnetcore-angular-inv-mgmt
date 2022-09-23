@@ -288,3 +288,8 @@ C:\src\MyProjects\dotnetcore-angular-inventory-management\InventoryManagement\Se
 C:\src\MyProjects\dotnetcore-angular-inventory-management\InventoryManagement\Server\obj\Debug\net6.0\Server.pdb
 C:\src\MyProjects\dotnetcore-angular-inventory-management\InventoryManagement\Server\obj\Debug\net6.0\Server.genruntimeconfig.cache
 C:\src\MyProjects\dotnetcore-angular-inventory-management\InventoryManagement\Server\obj\Debug\net6.0\ref\Server.dll
+C:\src\MyProjects\dotnetcore-angular-inventory-management\InventoryManagement\Server\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\src\MyProjects\dotnetcore-angular-inventory-management\InventoryManagement\Server\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\src\MyProjects\dotnetcore-angular-inventory-management\InventoryManagement\Server\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\src\MyProjects\dotnetcore-angular-inventory-management\InventoryManagement\Server\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
+C:\src\MyProjects\dotnetcore-angular-inventory-management\InventoryManagement\Server\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
