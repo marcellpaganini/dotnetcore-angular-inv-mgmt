@@ -352,4 +352,6 @@ MigrationBackup/
 # Project specific
 InventoryManagement/.vs/
 InventoryManagement/Server/obj/Debug/
+InventoryManagement/Server/obj/staticwebassets.pack.sentinel
 InventoryManagement/Server/bin/Debug/
+InventoryManagement/.vs/InventoryManagement/v17/.suo
