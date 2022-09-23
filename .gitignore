@@ -350,6 +350,6 @@ MigrationBackup/
 .ionide/
 
 # Project specific
-InventoryManagement/.vs
-InventoryManagement/Server/obj/Debug
-InventoryManagement/Server/bin/Debug
+InventoryManagement/.vs/
+InventoryManagement/Server/obj/Debug/
+InventoryManagement/Server/bin/Debug/
