@@ -35,6 +35,7 @@ C:\src\MyProjects\dotnetcore-angular-inventory-management\InventoryManagement\Se
 C:\src\MyProjects\dotnetcore-angular-inventory-management\InventoryManagement\Server\bin\Debug\net6.0\Humanizer.dll
 C:\src\MyProjects\dotnetcore-angular-inventory-management\InventoryManagement\Server\bin\Debug\net6.0\MessagePack.dll
 C:\src\MyProjects\dotnetcore-angular-inventory-management\InventoryManagement\Server\bin\Debug\net6.0\MessagePack.Annotations.dll
+C:\src\MyProjects\dotnetcore-angular-inventory-management\InventoryManagement\Server\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\src\MyProjects\dotnetcore-angular-inventory-management\InventoryManagement\Server\bin\Debug\net6.0\Microsoft.AspNetCore.Razor.Language.dll
 C:\src\MyProjects\dotnetcore-angular-inventory-management\InventoryManagement\Server\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\src\MyProjects\dotnetcore-angular-inventory-management\InventoryManagement\Server\bin\Debug\net6.0\Microsoft.Build.Locator.dll
