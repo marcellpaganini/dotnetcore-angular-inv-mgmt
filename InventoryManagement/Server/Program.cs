@@ -28,6 +28,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
     options.Password.RequiredLength = 7;
 }).AddEntityFrameworkStores<ApplicationDbContext>();
 
+builder.Services.AddScoped<JwtHandler>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
