@@ -13,6 +13,7 @@ import { ProductsComponent } from './products/products.component';
 import { SuppliersComponent } from './suppliers/suppliers.component';
 import { ProductEditComponent } from './products/product-edit.component';
 import { SupplierEditComponent } from './suppliers/supplier-edit.component';
+import { LoginComponent } from './auth/login.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { SupplierEditComponent } from './suppliers/supplier-edit.component';
     ProductsComponent,
     SuppliersComponent,
     ProductEditComponent,
-    SupplierEditComponent
+    SupplierEditComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
