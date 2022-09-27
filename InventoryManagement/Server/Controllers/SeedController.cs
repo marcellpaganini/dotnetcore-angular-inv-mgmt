@@ -7,9 +7,10 @@ using Server.Data;
 
 namespace Server.Controllers
 {
+
+    [Authorize(Roles = "Administrator")]
     [Route("api/[controller]/[action]")]
     [ApiController]
-    [Authorize(Roles = "Administrator")]
     public class SeedController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
