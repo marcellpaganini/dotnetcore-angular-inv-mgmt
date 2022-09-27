@@ -12,7 +12,7 @@ export class BaseFormComponent {
   handleErrors = (error: any) => {
     if (error instanceof HttpErrorResponse) {
       const errorMessages = error.error;
-      if (error.status === 400) {
+      if (error.status === 400 || error.status === 401) {
         const errorTitles = Object.keys(errorMessages.errors);
 
         for (let title in errorTitles) {
