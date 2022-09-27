@@ -8,7 +8,7 @@ using Server.Data;
 namespace Server.Controllers
 {
 
-    //[Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator")]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class SeedController : ControllerBase
