@@ -7,16 +7,17 @@ import { ProductEditComponent } from './products/product-edit.component';
 import { SuppliersComponent } from './suppliers/suppliers.component';
 import { SupplierEditComponent } from './suppliers/supplier-edit.component';
 import { LoginComponent } from './auth/login.component';
+import { AuthGuard } from './auth/auth.guard';
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'products', component: ProductsComponent },
-  { path: 'product/:id', component: ProductEditComponent },
-  { path: 'product', component: ProductEditComponent },
+  { path: 'product/:id', component: ProductEditComponent, canActivate: [AuthGuard] },
+  { path: 'product', component: ProductEditComponent, canActivate: [AuthGuard] },
   { path: 'suppliers', component: SuppliersComponent },
-  { path: 'supplier/:id', component: SupplierEditComponent },
-  { path: 'supplier', component: SupplierEditComponent },
+  { path: 'supplier/:id', component: SupplierEditComponent, canActivate: [AuthGuard] },
+  { path: 'supplier', component: SupplierEditComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent } 
 ];
 
