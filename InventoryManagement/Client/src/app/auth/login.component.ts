@@ -34,14 +34,12 @@ export class LoginComponent extends BaseFormComponent implements OnInit {
     this.authService
       .login(loginRequest)
       .subscribe(result => {
-        console.log(result);
         this.loginResult = result;
 
         if (result.success) {
           this.router.navigate(["/"]);
         }
       }, error => {
-        console.log(error);
         if (error.status == 401) {
           this.loginResult = error.error;
         }
